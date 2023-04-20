@@ -1,11 +1,10 @@
 package com.aloarte.loomparesources.data
 
-import com.aloarte.loomparesources.domain.OompaLoompaBo
+import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 import kotlinx.coroutines.flow.Flow
 
 interface WillyWonkaDatasource {
 
-    fun getOompaLoompas(page:Int): Flow<List<OompaLoompaBo>>
-
+    suspend fun getOompaLoompas(page:Int): Flow<OompaLoompaContentBo>
 
 }

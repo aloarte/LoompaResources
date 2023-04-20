@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources.domain
+package com.aloarte.loomparesources.domain.model
 
 data class OompaLoompaBo(
     val firstName: String,
@@ -11,6 +11,6 @@ data class OompaLoompaBo(
     val age: Int,
     val country: String,
     val height: Int,
-    val id: String,
+    val id: Int,
     val quota: String? = null
 )

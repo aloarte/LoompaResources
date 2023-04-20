@@ -1,18 +1,13 @@
 package com.aloarte.loomparesources.domain
 
-import com.aloarte.loomparesources.data.WillyWonkaDatasource
-import com.aloarte.loomparesources.data.WillyWonkaRepository
+import com.aloarte.loomparesources.domain.model.OompaLoompaBo
+import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class WillyWonkaRepositoryImpl @Inject constructor(private val datasource: WillyWonkaDatasource) :
-    WillyWonkaRepository {
-    override fun getOompaLoompas(page: Int): Flow<List<OompaLoompaBo>> {
-        return datasource.getOompaLoompas(page)
-    }
+interface WillyWonkaRepository {
 
-    override fun getOompaLoompa(id: Int): OompaLoompaBo {
-        TODO("Not yet implemented")
-    }
+    suspend fun getOompaLoompas(page:Int): Flow<OompaLoompaContentBo>
+
+    suspend fun getOompaLoompa(id: Int): OompaLoompaBo
 
 }

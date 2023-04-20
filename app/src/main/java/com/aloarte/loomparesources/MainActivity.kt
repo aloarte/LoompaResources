@@ -11,7 +11,7 @@ import com.aloarte.loomparesources.ui.theme.LoompaResourcesTheme
 import com.aloarte.loomparesources.view.Home
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

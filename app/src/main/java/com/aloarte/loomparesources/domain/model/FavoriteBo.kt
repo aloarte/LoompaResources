@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources.domain
+package com.aloarte.loomparesources.domain.model
 
 data class FavoriteBo(
     val color: String,
