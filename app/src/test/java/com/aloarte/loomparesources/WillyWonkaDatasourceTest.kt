@@ -32,6 +32,8 @@ class WillyWonkaDatasourceTest {
         const val NAME = "Marcy"
         const val LAST_NAME = "Karadzas"
         const val COLOR = "red"
+        const val DESCRIPTION = "Description"
+        const val QUOTE = "quote"
         const val FOOD = "Chocolat"
         const val RANDOM_STRING = "random"
         const val SONG = "song"
@@ -66,6 +68,25 @@ class WillyWonkaDatasourceTest {
                 "            \"id\": $ID\n" +
                 "        }]\n" +
                 "}"
+        const val JSON_DETAIL = "{\n" +
+                "    \"last_name\": \"$LAST_NAME\",\n" +
+                "    \"description\": \"$DESCRIPTION\",\n" +
+                "    \"image\": \"$IMAGE\",\n" +
+                "    \"profession\": \"$PROFESSION\",\n" +
+                "    \"quota\": \"$QUOTE\",\n" +
+                "    \"height\": $HEIGHT,\n" +
+                "    \"first_name\": \"$NAME\",\n" +
+                "    \"country\": \"$COUNTRY\",\n" +
+                "    \"age\": $AGE,\n" +
+                "    \"favorite\": {\n" +
+                "        \"color\": \"$COLOR\",\n" +
+                "        \"food\": \"$FOOD\",\n" +
+                "        \"random_string\": \"$RANDOM_STRING\",\n" +
+                "        \"song\": \"$SONG\"\n" +
+                "    },\n" +
+                "    \"gender\": \"$GENDER\",\n" +
+                "    \"email\": \"$EMAIL\"\n" +
+                "}"
 
     }
 
@@ -75,6 +96,26 @@ class WillyWonkaDatasourceTest {
         profession = PROFESSION,
         image = IMAGE,
         id = ID,
+        height = HEIGHT,
+        gender = GENDER,
+        country = COUNTRY,
+        age = AGE,
+        email = EMAIL,
+        favorite = FavoriteBo(
+            song = SONG,
+            color = COLOR,
+            randomString = RANDOM_STRING,
+            food = FOOD
+        )
+    )
+    private val detailedOompaLoompa = OompaLoompaBo(
+        firstName = NAME,
+        lastName = LAST_NAME,
+        description = DESCRIPTION,
+        quote = QUOTE,
+        profession = PROFESSION,
+        image = IMAGE,
+        id = 0,
         height = HEIGHT,
         gender = GENDER,
         country = COUNTRY,
@@ -110,21 +151,42 @@ class WillyWonkaDatasourceTest {
         coEvery { api.getOompaLoompas(page = 1) } returns
                 mediaType.buildResponse(resultCode = 200, json = JSON_LIST)
 
-        val userStats = runBlocking { datasource.getOompaLoompas(page = 1) }
+        val listResult = runBlocking { datasource.getOompaLoompas(page = 1) }
 
         val expected = OompaLoompaContentBo(1, listOf(oompaLoompa), 2)
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, userStats.first())
+        Assert.assertEquals(expected, listResult.first())
     }
 
     @Test
     fun `test get oompa loompas error`() = coroutinesTestRule.runBlockingTest {
         coEvery { api.getOompaLoompas(page = 1) } returns mediaType.buildResponse(resultCode = 404)
 
-        val userStats = runBlocking { datasource.getOompaLoompas(page = 1) }
+        val listResult = runBlocking { datasource.getOompaLoompas(page = 1) }
 
         val expected = OompaLoompaContentBo()
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, userStats.first())
+        Assert.assertEquals(expected, listResult.first())
+    }
+
+    @Test
+    fun `test get oompa loompa detail success`() = coroutinesTestRule.runBlockingTest {
+        coEvery { api.getOompaLoompaDetail(id = ID) } returns
+                mediaType.buildResponse(resultCode = 200, json = JSON_DETAIL)
+
+        val detailResult = runBlocking { datasource.getOompaLoompa(id = ID) }
+
+        coVerify { api.getOompaLoompaDetail(id = ID) }
+        Assert.assertEquals(detailedOompaLoompa, detailResult)
+    }
+
+    @Test
+    fun `test get oompa loompa detail error`() = coroutinesTestRule.runBlockingTest {
+        coEvery { api.getOompaLoompaDetail(id = ID) } returns mediaType.buildResponse(resultCode = 404)
+
+        val detailResult = runBlocking { datasource.getOompaLoompa(id = ID) }
+
+        coVerify { api.getOompaLoompaDetail(id = ID) }
+        Assert.assertNull(detailResult)
     }
 }

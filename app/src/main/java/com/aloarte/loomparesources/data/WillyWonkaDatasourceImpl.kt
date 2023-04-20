@@ -1,8 +1,11 @@
 package com.aloarte.loomparesources.data
 
 import com.aloarte.loomparesources.data.Parsers.parseResponse
+import com.aloarte.loomparesources.data.Parsers.parseResponseList
 import com.aloarte.loomparesources.data.Parsers.toContentsBo
+import com.aloarte.loomparesources.data.Parsers.toItemBo
 import com.aloarte.loomparesources.data.api.WillyWonkaApi
+import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -21,11 +24,10 @@ class WillyWonkaDatasourceImpl @Inject constructor(
             val response = api.getOompaLoompas(page)
 
             if (response.code() == API_SUCCESS_CODE) {
-                val oompaLompaContents = parseResponse(response.body(), gson)
-                if (oompaLompaContents != null) {
+                val oompaLoompaContents = parseResponseList(response.body(), gson)
+                if (oompaLoompaContents != null) {
                     flow {
-                        val a = toContentsBo(oompaLompaContents)
-                        emit(a)
+                        emit(toContentsBo(oompaLoompaContents))
                     }
                 } else {
                     flow { emit(OompaLoompaContentBo()) }
@@ -37,6 +39,27 @@ class WillyWonkaDatasourceImpl @Inject constructor(
         } catch (e: Exception) {
             flow { emit(OompaLoompaContentBo()) }
         }
+    }
+
+    override suspend fun getOompaLoompa(id: Int): OompaLoompaBo? {
+        return try {
+            val response = api.getOompaLoompaDetail(id)
+
+            if (response.code() == API_SUCCESS_CODE) {
+                val oompaLoompaContent = parseResponse(response.body(), gson)
+                if (oompaLoompaContent != null) {
+                    toItemBo(oompaLoompaContent)
+                } else {
+                    null
+                }
+
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+
     }
 
 

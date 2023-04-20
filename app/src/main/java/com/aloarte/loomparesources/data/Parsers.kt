@@ -10,10 +10,20 @@ import com.google.gson.Gson
 import okhttp3.ResponseBody
 
 object Parsers {
-    fun parseResponse(body: ResponseBody?, gson: Gson): OompaLoompaListDto? = try {
+    fun parseResponseList(body: ResponseBody?, gson: Gson): OompaLoompaListDto? = try {
         body?.string()?.let {
             if (it.isEmpty()) null
             else gson.fromJson(it, OompaLoompaListDto::class.java)
+
+        }
+    } catch (e: Exception) {
+        null
+    }
+
+    fun parseResponse(body: ResponseBody?, gson: Gson): OompaLoompaDto? = try {
+        body?.string()?.let {
+            if (it.isEmpty()) null
+            else gson.fromJson(it, OompaLoompaDto::class.java)
 
         }
     } catch (e: Exception) {
@@ -26,7 +36,7 @@ object Parsers {
         total = dto.total
     )
 
-    private fun toItemBo(dto: OompaLoompaDto) =
+    fun toItemBo(dto: OompaLoompaDto) =
         OompaLoompaBo(
             firstName = dto.first_name,
             lastName = dto.last_name,
@@ -38,8 +48,9 @@ object Parsers {
             height = dto.height,
             id = dto.id,
             image = dto.image,
-            profession = dto.profession
-
+            profession = dto.profession,
+            quote = dto.quota,
+            description = dto.description
 
         )
 

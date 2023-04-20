@@ -11,6 +11,8 @@ data class OompaLoompaBo(
     val age: Int,
     val country: String,
     val height: Int,
-    val id: Int,
-    val quota: String? = null
+    val id: Int = -1,
+    val quote: String? = null,
+    val description: String? = null
+
 )
