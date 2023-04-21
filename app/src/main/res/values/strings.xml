@@ -4,6 +4,7 @@
     <string name="detail_id">ID: </string>
     <string name="detail_mail">Mail: </string>
     <string name="detail_country">Country: </string>
+    <string name="detail_profession">Profession: </string>
     <string name="detail_age">Age: </string>
     <string name="detail_gender">Gender: </string>
     <string name="detail_height">Height: </string>
