@@ -155,7 +155,7 @@ class WillyWonkaDatasourceTest {
 
         val expected = OompaLoompaContentBo(1, listOf(oompaLoompa), 2)
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, listResult.first())
+        Assert.assertEquals(expected, listResult)
     }
 
     @Test
@@ -166,7 +166,7 @@ class WillyWonkaDatasourceTest {
 
         val expected = OompaLoompaContentBo()
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, listResult.first())
+        Assert.assertEquals(expected, listResult)
     }
 
     @Test
