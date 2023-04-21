@@ -25,8 +25,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-
             LoompaResourcesTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -39,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         }
                         state.detailRequested == ScreenStatus.Success  ->{
                             state.oompaLoompaDetail?.let{
-                                Detail(employee = state.oompaLoompaDetail)
+                                Detail(employee = state.oompaLoompaDetail, employeeId = state.oompaLoompaDetailId)
                             }
                         }
                         state.detailRequested == ScreenStatus.Requested  ->{
