@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources
+package com.aloarte.loomparesources.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

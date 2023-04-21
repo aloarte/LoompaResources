@@ -8,6 +8,7 @@ import com.aloarte.loomparesources.data.api.WillyWonkaApi
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class WillyWonkaDatasourceImpl @Inject constructor(
@@ -19,6 +20,7 @@ class WillyWonkaDatasourceImpl @Inject constructor(
 
     override suspend fun getOompaLoompas(page: Int): OompaLoompaContentBo {
         return try {
+            delay(2000)
             val response = api.getOompaLoompas(page)
 
             if (response.code() == API_SUCCESS_CODE) {

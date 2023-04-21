@@ -13,7 +13,7 @@ class WillyWonkaRepositoryImpl @Inject constructor(private val datasource: Willy
 
     override fun getOompaLoompas() = Pager(
         config = PagingConfig(
-            pageSize = 20,
+            pageSize = 25,
         ),
         pagingSourceFactory = {
             OompaLoompaPagingSource(datasource)

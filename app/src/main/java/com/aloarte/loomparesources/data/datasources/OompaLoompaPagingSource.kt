@@ -28,8 +28,8 @@ class OompaLoompaPagingSource(
                 } else {
                     page.minus(1)
                 },
-                //End of pagination if the page > total as there are 20 pages only on the API
-                nextKey = if (page > response.total || response.results.isEmpty()) {
+                //End of pagination if the page >= total as there are 20 pages only on the API
+                nextKey = if (page >= response.total || response.results.isEmpty()) {
                     null
                 } else {
                     page.plus(1)
