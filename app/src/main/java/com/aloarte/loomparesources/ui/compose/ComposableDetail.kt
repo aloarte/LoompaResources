@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources.view
+package com.aloarte.loomparesources.ui.compose
 
 import androidx.compose.runtime.Composable
 

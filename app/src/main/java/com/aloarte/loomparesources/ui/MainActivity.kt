@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources
+package com.aloarte.loomparesources.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.aloarte.loomparesources.ui.compose.home.Home
 import com.aloarte.loomparesources.ui.theme.LoompaResourcesTheme
-import com.aloarte.loomparesources.view.Home
 import dagger.hilt.android.AndroidEntryPoint
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

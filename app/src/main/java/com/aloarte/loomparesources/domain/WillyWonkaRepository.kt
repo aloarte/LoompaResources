@@ -1,12 +1,13 @@
 package com.aloarte.loomparesources.domain
 
+import androidx.paging.PagingData
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
-import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 import kotlinx.coroutines.flow.Flow
 
 interface WillyWonkaRepository {
 
-    suspend fun getOompaLoompas(page:Int): Flow<OompaLoompaContentBo>
+    //This is not a suspend function since the PagingDatasource launch in a corroutine scope
+    fun getOompaLoompas(): Flow<PagingData<OompaLoompaBo>>
 
     suspend fun getOompaLoompa(id: Int): OompaLoompaBo
 

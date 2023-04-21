@@ -4,8 +4,8 @@ package com.aloarte.loomparesources
 
 
 import com.aloarte.loomparesources.Utils.buildResponse
-import com.aloarte.loomparesources.data.WillyWonkaDatasource
-import com.aloarte.loomparesources.data.WillyWonkaDatasourceImpl
+import com.aloarte.loomparesources.data.datasources.WillyWonkaDatasource
+import com.aloarte.loomparesources.data.datasources.WillyWonkaDatasourceImpl
 import com.aloarte.loomparesources.data.api.WillyWonkaApi
 import com.aloarte.loomparesources.domain.model.FavoriteBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
@@ -155,7 +155,7 @@ class WillyWonkaDatasourceTest {
 
         val expected = OompaLoompaContentBo(1, listOf(oompaLoompa), 2)
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, listResult.first())
+        Assert.assertEquals(expected, listResult)
     }
 
     @Test
@@ -166,7 +166,7 @@ class WillyWonkaDatasourceTest {
 
         val expected = OompaLoompaContentBo()
         coVerify { api.getOompaLoompas(page = 1) }
-        Assert.assertEquals(expected, listResult.first())
+        Assert.assertEquals(expected, listResult)
     }
 
     @Test
