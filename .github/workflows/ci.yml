@@ -50,5 +50,5 @@ jobs:
       - name: Unit Tests
         run: ./gradlew :app:testDebugUnitTest
 
-      - name: Unit Tests Report
+      - name: Unit Tests Loompa Resources app
         uses: asadmansr/android-test-report-action@v1.2.0

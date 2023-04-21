@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources
+package com.aloarte.loomparesources.utils
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody

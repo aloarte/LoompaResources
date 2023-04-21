@@ -1,4 +1,4 @@
-package com.aloarte.loomparesources
+package com.aloarte.loomparesources.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
