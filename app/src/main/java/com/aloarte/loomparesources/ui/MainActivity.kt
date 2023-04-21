@@ -37,14 +37,17 @@ class MainActivity : ComponentActivity() {
                         }
                         state.detailRequested == ScreenStatus.Success  ->{
                             state.oompaLoompaDetail?.let{
-                                Detail(employee = state.oompaLoompaDetail, employeeId = state.oompaLoompaDetailId)
+                                Detail(employee = state.oompaLoompaDetail, employeeId = state.oompaLoompaDetailId){
+                                    viewModel.onEvent(UiEvent.LoadHome)
+                                }
                             }
                         }
                         state.detailRequested == ScreenStatus.Requested  ->{
-                            Text("LOADING")
+                            //TODO
                         }
                         state.detailRequested == ScreenStatus.Error  ->{
-                            Text("ERRORRRRR ${state.errorMessage}")
+                            //TODO
+
                         }
                     }
 

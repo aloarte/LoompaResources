@@ -1,6 +1,7 @@
 package com.aloarte.loomparesources.ui.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,24 +29,45 @@ import com.skydoves.landscapist.glide.GlideImage
 
 
 @Composable
-fun Detail(employee: OompaLoompaBo, employeeId: Int) {
+fun Detail(employee: OompaLoompaBo, employeeId: Int, onExitClick:()->Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-
-        GlideImage(
-            previewPlaceholder = R.mipmap.portait_placeholder,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp),
-            imageModel = employee.image,
-            imageOptions = ImageOptions(
-                contentScale = ContentScale.Crop,
-                alignment = Alignment.Center
+        Box(modifier = Modifier.fillMaxWidth()) {
+            GlideImage(
+                previewPlaceholder = R.mipmap.portait_placeholder,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .align(Alignment.TopCenter),
+                imageModel = employee.image,
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                )
             )
-        )
+            Row(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(horizontal = 10.dp, vertical = 10.dp)
+                    .clickable(onClick = onExitClick),
+            ) {
+                Image(
+                    modifier = Modifier
+                        .width(30.dp)
+                        .height(30.dp),
+                    painter = painterResource(R.drawable.ic_cancel),
+                    contentDescription = "Info icon",
+                    contentScale = ContentScale.Crop,
+
+                )
+            }
+
+        }
+
+
         EmployeeInfo(
             employee = employee,
             employeeId = employeeId,
@@ -91,7 +113,6 @@ fun EmployeeInfo(employee: OompaLoompaBo, employeeId: Int, modifier: Modifier) {
             PairText(R.string.detail_quoter, employee.quote, true)
 
         }
-
 
     }
 }
