@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -33,7 +34,8 @@ class WillyWonkaDatasourceTest {
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()
 
-    private var api: WillyWonkaApi = mockk()
+    @MockK
+    private lateinit var api: WillyWonkaApi
 
     private val mediaType: MediaType = "application/json; charset=utf-8".toMediaType()
 
@@ -43,7 +45,7 @@ class WillyWonkaDatasourceTest {
 
     @Before
     fun setUp() {
-        MockKAnnotations.init()
+        MockKAnnotations.init(this)
         datasource = WillyWonkaDatasourceImpl(api, gson)
     }
 

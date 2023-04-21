@@ -1,6 +1,5 @@
 package com.aloarte.loomparesources.data.datasources
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo

@@ -9,6 +9,4 @@ data class UiState(
     val errorMessage: String? = null,
     val oompaLoompaDetailId: Int = -1,
     val oompaLoompaDetail: OompaLoompaBo? = null
-
-
 )

@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: WillyWonkaRepository) :
     ViewModel() {
@@ -42,6 +41,7 @@ class MainViewModel @Inject constructor(private val repository: WillyWonkaReposi
                         errorMessage = null
                     )
                 }
+                println("${_state.value}")
             }
 
             is UiEvent.LoadDetail -> {
