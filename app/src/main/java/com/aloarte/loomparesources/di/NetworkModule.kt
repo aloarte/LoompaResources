@@ -1,6 +1,7 @@
 package com.aloarte.loomparesources.di
 
 import com.aloarte.loomparesources.data.api.WillyWonkaApi
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,4 +38,8 @@ object NetworkModule {
     fun provideWillyWonkaApiClient(@Named("Napptilus") retrofit: Retrofit): WillyWonkaApi {
         return retrofit.create(WillyWonkaApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideGson() : Gson = Gson()
 }
