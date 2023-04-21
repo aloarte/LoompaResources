@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,10 +39,10 @@ import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OompaLoompaListItem(employee: OompaLoompaBo) {
-    Card {
+fun OompaLoompaListItem(employee: OompaLoompaBo, onCardClicked:(Int)->Unit) {
+    Card(onClick = { onCardClicked.invoke(employee.id) } ) {
         Row(
             modifier = Modifier
                 .height(100.dp)

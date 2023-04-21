@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.aloarte.loomparesources.ui.UiEvent
 import com.aloarte.loomparesources.ui.viewmodel.MainViewModel
-
 
 @Composable
 fun OompaLoompaList(viewModel: MainViewModel) {
@@ -28,29 +28,33 @@ fun OompaLoompaList(viewModel: MainViewModel) {
             items = oompaLoompas
         ) { oompaLoompa ->
             oompaLoompa?.let {
-                OompaLoompaListItem(oompaLoompa)
+                OompaLoompaListItem(oompaLoompa){
+                    //If the card item gets clicked trigger the LoadDetail ui event
+                    viewModel.onEvent(UiEvent.LoadDetail(oompaLoompaId = oompaLoompa.id))
+                }
             }
             Divider(thickness = 5.dp, color = Color.Unspecified)
         }
 
-        when (val state = oompaLoompas.loadState.refresh) { //FIRST LOAD
+        //View for the first load state
+        when (val state = oompaLoompas.loadState.refresh) {
             is LoadState.Error -> {
                 item { PagingComponentError(state.error.message ?: "") }
             }
 
-            is LoadState.Loading -> { // Loading UI
+            is LoadState.Loading -> {
                 item { PagingComponentStatus("Initial loading") }
             }
 
             else -> {}
         }
-
-        when (val state = oompaLoompas.loadState.append) { // Pagination
+        //View for the pagination load state
+        when (val state = oompaLoompas.loadState.append) {
             is LoadState.Error -> {
                 item { PagingComponentError(state.error.message ?: "") }
             }
 
-            is LoadState.Loading -> { // Pagination Loading UI
+            is LoadState.Loading -> {
                 item { PagingComponentStatus("Loading") }
             }
 

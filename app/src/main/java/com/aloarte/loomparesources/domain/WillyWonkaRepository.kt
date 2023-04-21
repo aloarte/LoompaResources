@@ -9,6 +9,6 @@ interface WillyWonkaRepository {
     //This is not a suspend function since the PagingDatasource launch in a corroutine scope
     fun getOompaLoompas(): Flow<PagingData<OompaLoompaBo>>
 
-    suspend fun getOompaLoompa(id: Int): OompaLoompaBo
+    suspend fun getOompaLoompa(id: Int): OompaLoompaBo?
 
 }
