@@ -7,10 +7,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.aloarte.loomparesources.ui.compose.Detail
+import com.aloarte.loomparesources.ui.compose.detail.Detail
 import com.aloarte.loomparesources.ui.compose.home.Home
 import com.aloarte.loomparesources.ui.state.ScreenStatus
 import com.aloarte.loomparesources.ui.theme.LoompaResourcesTheme
