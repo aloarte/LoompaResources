@@ -16,31 +16,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.aloarte.loomparesources.R
+import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 import com.aloarte.loomparesources.ui.state.UiEvent
-import com.aloarte.loomparesources.ui.viewmodel.MainViewModel
 
 @Composable
-fun OompaLoompaList(viewModel: MainViewModel) {
-    val oompaLoompas = viewModel.getOompaLoompas().collectAsLazyPagingItems()
+fun OompaLoompaList(pagingData: LazyPagingItems<OompaLoompaBo>, onEvent: (UiEvent) -> Unit) {
     LazyColumn {
-
         items(
-            items = oompaLoompas
+            items = pagingData
         ) { oompaLoompa ->
             oompaLoompa?.let {
-                OompaLoompaListItem(oompaLoompa){
+                OompaLoompaListItem(oompaLoompa) {
                     //If the card item gets clicked trigger the LoadDetail ui event
-                    viewModel.onEvent(UiEvent.LoadDetail(oompaLoompaId = oompaLoompa.id))
+                    onEvent(UiEvent.LoadDetail(oompaLoompaId = oompaLoompa.id))
                 }
             }
             Divider(thickness = 5.dp, color = Color.Unspecified)
         }
 
         //View for the first load state
-        when (val state = oompaLoompas.loadState.refresh) {
+        when (val state = pagingData.loadState.refresh) {
             is LoadState.Error -> {
                 item { PagingComponentError(state.error.message ?: "") }
             }
@@ -51,8 +49,10 @@ fun OompaLoompaList(viewModel: MainViewModel) {
 
             else -> {}
         }
+
+
         //View for the pagination load state
-        when (val state = oompaLoompas.loadState.append) {
+        when (val state = pagingData.loadState.append) {
             is LoadState.Error -> {
                 item { PagingComponentError(state.error.message ?: "") }
             }
@@ -97,5 +97,6 @@ fun PagingComponentError(text: String) {
                 .padding(8.dp),
             text = text
         )
+
     }
 }

@@ -12,14 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.LazyPagingItems
 import com.aloarte.loomparesources.R
-import com.aloarte.loomparesources.ui.viewmodel.MainViewModel
+import com.aloarte.loomparesources.domain.model.OompaLoompaBo
+import com.aloarte.loomparesources.ui.state.UiEvent
 
 @Composable
-fun Home() {
-    val viewModel = hiltViewModel<MainViewModel>()
-
+fun Home(pagingData: LazyPagingItems<OompaLoompaBo>, onEvent: (UiEvent) -> Unit) {
     Column(Modifier.padding(horizontal = 20.dp)) {
         Column(
             modifier = Modifier
@@ -29,14 +28,14 @@ fun Home() {
         ) {
             Image(
                 painter = painterResource(R.drawable.wonka_logo),
-                contentDescription = "Cancel icon",
+                contentDescription = "Wonka logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(200.dp)
                     .height(130.dp)
             )
         }
-        OompaLoompaList(viewModel)
+        OompaLoompaList(pagingData,onEvent)
     }
 }
 
