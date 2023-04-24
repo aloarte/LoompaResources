@@ -6,6 +6,7 @@ import com.aloarte.loomparesources.data.datasources.OompaLoompaPagingSource
 import com.aloarte.loomparesources.data.datasources.WillyWonkaDatasource
 import com.aloarte.loomparesources.domain.WillyWonkaRepository
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class WillyWonkaRepositoryImpl @Inject constructor(private val datasource: WillyWonkaDatasource) :
@@ -20,6 +21,10 @@ class WillyWonkaRepositoryImpl @Inject constructor(private val datasource: Willy
         }
     ).flow
 
-    override suspend fun getOompaLoompa(id: Int): OompaLoompaBo? = datasource.getOompaLoompa(id)
+    override suspend fun getOompaLoompa(id: Int): OompaLoompaBo? {
+        //Delay to show smoothly the transition with the lottie animation
+        delay(1000)
+        return datasource.getOompaLoompa(id)
+    }
 
 }

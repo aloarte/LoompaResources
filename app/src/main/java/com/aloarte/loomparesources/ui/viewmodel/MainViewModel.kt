@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.aloarte.loomparesources.domain.WillyWonkaRepository
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
-import com.aloarte.loomparesources.ui.UiEvent
-import com.aloarte.loomparesources.ui.UiState
+import com.aloarte.loomparesources.ui.state.UiEvent
+import com.aloarte.loomparesources.ui.state.UiState
 import com.aloarte.loomparesources.ui.state.ScreenStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -59,7 +59,7 @@ class MainViewModel @Inject constructor(private val repository: WillyWonkaReposi
                     detail?.let {
                         onEvent(UiEvent.OompaLoompaDetailSuccess(oompaLoompa = detail))
                     } ?: run {
-                        onEvent(UiEvent.OompaLoompaDetailError(errorMessage = "Error loading the ${event.oompaLoompaId} employee"))
+                        onEvent(UiEvent.OompaLoompaDetailError(errorMessage = "We couldn't find the employee with id ${event.oompaLoompaId}"))
                     }
                 }
             }

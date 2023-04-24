@@ -13,17 +13,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.aloarte.loomparesources.ui.UiEvent
+import com.aloarte.loomparesources.R
+import com.aloarte.loomparesources.ui.state.UiEvent
 import com.aloarte.loomparesources.ui.viewmodel.MainViewModel
 
 @Composable
 fun OompaLoompaList(viewModel: MainViewModel) {
     val oompaLoompas = viewModel.getOompaLoompas().collectAsLazyPagingItems()
     LazyColumn {
+
         items(
             items = oompaLoompas
         ) { oompaLoompa ->
@@ -43,7 +46,7 @@ fun OompaLoompaList(viewModel: MainViewModel) {
             }
 
             is LoadState.Loading -> {
-                item { PagingComponentStatus("Initial loading") }
+                item { PagingComponentStatus(stringResource(id = R.string.list_init_load)) }
             }
 
             else -> {}
@@ -55,7 +58,7 @@ fun OompaLoompaList(viewModel: MainViewModel) {
             }
 
             is LoadState.Loading -> {
-                item { PagingComponentStatus("Loading") }
+                item { PagingComponentStatus(stringResource(id = R.string.list_load)) }
             }
 
             else -> {}
@@ -71,12 +74,13 @@ fun PagingComponentStatus(text: String) {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .padding(8.dp),
             text = text
         )
-        CircularProgressIndicator(color = Color.Black)
+        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -87,11 +91,11 @@ fun PagingComponentError(text: String) {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .padding(8.dp),
             text = text
         )
-        CircularProgressIndicator(color = Color.Black)
     }
 }
