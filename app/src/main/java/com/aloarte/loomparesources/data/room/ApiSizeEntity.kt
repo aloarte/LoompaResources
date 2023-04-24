@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
     tableName = "api_total_table",
 )
 data class ApiSizeEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val id:Int,
     val count: Int
 )
 

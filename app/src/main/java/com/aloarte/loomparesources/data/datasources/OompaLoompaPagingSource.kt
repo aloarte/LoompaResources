@@ -20,7 +20,6 @@ class OompaLoompaPagingSource(
         val databaseData = dao.getOompaLoompasPaginated(PAGE_SIZE, (page - 1) * PAGE_SIZE)
         val apiSize = dao.getApiTotal()?.count ?: -1
 
-
         //if the data from the page is on the database, just return it
         return if (databaseData.isNotEmpty() && apiSize > 0) {
             OompaLoompaContentBo(

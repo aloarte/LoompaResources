@@ -22,6 +22,8 @@ class WillyWonkaRepositoryImpl @Inject constructor(
     override fun getOompaLoompas() = Pager(
         config = PagingConfig(
             pageSize = PAGE_SIZE,
+            prefetchDistance = 10,
+            initialLoadSize = 25
         ),
         pagingSourceFactory = {
             OompaLoompaPagingSource(datasource, dao)

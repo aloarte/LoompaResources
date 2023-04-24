@@ -104,7 +104,7 @@ object Parsers {
         description = description ?: ""
     )
 
-    fun Int.toApiSize() = ApiSizeEntity(this)
+    fun Int.toApiSize() = ApiSizeEntity(count = this, id = 0)
     fun ApiSizeEntity.toApiSize() = count
 
 }

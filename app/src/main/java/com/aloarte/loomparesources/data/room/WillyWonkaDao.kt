@@ -23,15 +23,15 @@ interface WillyWonkaDao {
 
     @Transaction
     @Upsert
-    suspend fun addOompaLoompas(employees: List<OompaLoompaEntity>){
-        employees.forEach { employee->
+    suspend fun addOompaLoompas(employees: List<OompaLoompaEntity>) {
+        employees.forEach { employee ->
             addOompaLoompa(employee)
         }
     }
 
     @Transaction
-    @Query("SELECT count FROM api_total_table")
-    suspend fun getApiTotal(): ApiSizeEntity?
+    @Query("SELECT * FROM api_total_table WHERE id = :idTotal")
+    suspend fun getApiTotal(idTotal: Int = 1): ApiSizeEntity?
 
     @Transaction
     @Insert
