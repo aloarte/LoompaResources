@@ -22,4 +22,4 @@ with **Jetpack Compose**. It uses the main jetpack components local **Room** dat
 
 ## :iphone: Screenshots & demo
 
-<img src="/results/home.png" width="200"> <img src="/results/detail.png" width="200">
+<img src="/resources/home.png" width="200"> <img src="/resources/detail.png" width="200">
