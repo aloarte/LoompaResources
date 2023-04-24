@@ -31,12 +31,11 @@ class OompaLoompaPagingSource(
         } else {
             //Query the api to retrieve the page
             val apiData = apiDatasource.getOompaLoompas(page = page)
-            //Add the total items in the API only if it were unset (first call)
-            if (apiSize < 0) dao.addApiTotal(apiData.total.toApiSize())
+            //Add the total items in the API only if it were unset (first call) and it were a successful call
+            if (apiSize < 0 && apiData.total >0) dao.addApiTotal(apiData.total.toApiSize())
             //Add the data from the page in the database
             dao.addOompaLoompas(apiData.results.map { it.toEntity() })
             apiData
-
         }
     }
 
@@ -51,20 +50,25 @@ class OompaLoompaPagingSource(
         return try {
             val page = params.key ?: 1
             val response = getData(page)
-            LoadResult.Page(
-                data = response.results,
-                prevKey = if (page == 1) {
-                    null
-                } else {
-                    page.minus(1)
-                },
-                //End of pagination if the page >= total as there are 20 pages only on the API
-                nextKey = if (page >= response.total || response.results.isEmpty()) {
-                    null
-                } else {
-                    page.plus(1)
-                },
-            )
+            if (response.current != -1) {
+                LoadResult.Page(
+                    data = response.results,
+                    prevKey = if (page == 1) {
+                        null
+                    } else {
+                        page.minus(1)
+                    },
+                    //End of pagination if the page >= total as there are 20 pages only on the API
+                    nextKey = if (page >= response.total || response.results.isEmpty()) {
+                        null
+                    } else {
+                        page.plus(1)
+                    },
+                )
+            } else {
+                LoadResult.Error(Exception("The API can't be reached and the database doesn't have more items."))
+            }
+
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
