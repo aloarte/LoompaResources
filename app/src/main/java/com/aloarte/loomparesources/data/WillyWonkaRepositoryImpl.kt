@@ -32,10 +32,10 @@ class WillyWonkaRepositoryImpl @Inject constructor(
 
     override suspend fun getOompaLoompa(id: Int): OompaLoompaBo? {
 
-        val databaseItem = dao.getOompaLoompa(id)
+        val databaseItem = dao.getOompaLoompa(id)?.toBo()
         //Check not only that the item is not null but if it had the description & quote already
         return if (databaseItem != null && !databaseItem.description.isNullOrEmpty() && !databaseItem.quote.isNullOrEmpty()) {
-            databaseItem.toBo()
+            databaseItem
         } else {
             //Query the API for the detail of the employee ID
             datasource.getOompaLoompa(id)?.let { oompaLoompaFromApi ->
@@ -44,7 +44,7 @@ class WillyWonkaRepositoryImpl @Inject constructor(
                 //Add the detail to the database
                 dao.addOompaLoompa(oompaLoompaFromApi.toEntity(id))
                 oompaLoompaFromApi
-            }
+            } ?: databaseItem
         }
     }
 

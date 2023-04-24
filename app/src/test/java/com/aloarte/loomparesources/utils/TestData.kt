@@ -1,5 +1,6 @@
 package com.aloarte.loomparesources.utils
 
+import com.aloarte.loomparesources.data.room.OompaLoompaEntity
 import com.aloarte.loomparesources.domain.model.FavoriteBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 
@@ -89,7 +90,7 @@ object TestData {
         quote = QUOTE,
         profession = PROFESSION,
         image = IMAGE,
-        id = 0,
+        id = ID,
         height = HEIGHT,
         gender = GENDER,
         country = COUNTRY,
@@ -101,6 +102,45 @@ object TestData {
             randomString = RANDOM_STRING,
             food = FOOD
         )
+    )
+
+    val oompaLoompaEntity = OompaLoompaEntity(
+        firstName = NAME,
+        lastName = LAST_NAME,
+        description = null,
+        quote = null,
+        profession = PROFESSION,
+        image = IMAGE,
+        id = 0,
+        height = HEIGHT,
+        gender = GENDER,
+        country = COUNTRY,
+        age = AGE,
+        email = EMAIL,
+        song = SONG,
+        color = COLOR,
+        randomString = RANDOM_STRING,
+        food = FOOD
+
+    )
+
+    val detailedOompaLoompaEntity = OompaLoompaEntity(
+        firstName = NAME,
+        lastName = LAST_NAME,
+        description = DESCRIPTION,
+        quote = QUOTE,
+        profession = PROFESSION,
+        image = IMAGE,
+        id = ID,
+        height = HEIGHT,
+        gender = GENDER,
+        country = COUNTRY,
+        age = AGE,
+        email = EMAIL,
+        song = SONG,
+        color = COLOR,
+        randomString = RANDOM_STRING,
+        food = FOOD
     )
 
 }
