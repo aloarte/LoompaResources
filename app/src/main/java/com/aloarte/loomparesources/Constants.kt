@@ -10,5 +10,6 @@ object Constants {
     const val FEMALE = "F"
     const val MALE = "M"
     const val API_SUCCESS_CODE = 200
+    const val PAGE_SIZE = 25
 
 }
