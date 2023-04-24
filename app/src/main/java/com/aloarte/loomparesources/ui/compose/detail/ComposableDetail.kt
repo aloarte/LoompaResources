@@ -21,8 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,13 +69,11 @@ fun Detail(employee: OompaLoompaBo, employeeId: Int, onExitClick: () -> Unit) {
                     painter = painterResource(R.drawable.ic_cancel),
                     contentDescription = "Info icon",
                     contentScale = ContentScale.Crop,
-
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
                     )
             }
 
         }
-
-
         EmployeeInfo(
             employee = employee,
             employeeId = employeeId,
@@ -81,8 +81,6 @@ fun Detail(employee: OompaLoompaBo, employeeId: Int, onExitClick: () -> Unit) {
                 .fillMaxWidth()
                 .fillMaxHeight()
         )
-
-
     }
 
 }
@@ -120,12 +118,14 @@ fun EmployeeInfo(employee: OompaLoompaBo, employeeId: Int, modifier: Modifier) {
         Row(Modifier.align(Alignment.TopCenter)) {
             Text(
                 fontSize = 25.sp,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 text = employee.firstName
             )
             Text(
                 fontSize = 25.sp,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier.padding(horizontal = 5.dp, vertical = 0.dp),
@@ -151,13 +151,12 @@ fun EmployeeInfo(employee: OompaLoompaBo, employeeId: Int, modifier: Modifier) {
 
             }
             PairText(R.string.detail_country, employee.country)
-
             PairText(
-                R.string.detail_gender, when (employee.gender) {
-                    "F" -> "Female"
-                    "M" -> "Male"
-                    else -> "Non binary"
-                }
+                R.string.detail_gender, stringResource (when (employee.gender) {
+                    "F" -> R.string.detail_gender_female
+                    "M" -> R.string.detail_gender_male
+                    else ->  R.string.detail_gender_non_binary
+                })
             )
             PairText(R.string.detail_height, employee.height.toString())
             PairText(R.string.detail_quoter, employee.quote, true) {
@@ -169,7 +168,7 @@ fun EmployeeInfo(employee: OompaLoompaBo, employeeId: Int, modifier: Modifier) {
 
             }
 
-            Divider(thickness = 20.dp, color = Color.Unspecified)
+            Divider(thickness = 50.dp, color = Color.Unspecified)
             Button(onClick = { favoritesDialog.value = true }) {
                 Text(
                     fontSize = 25.sp,

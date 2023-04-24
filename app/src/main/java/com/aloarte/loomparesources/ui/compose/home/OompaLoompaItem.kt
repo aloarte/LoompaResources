@@ -1,5 +1,6 @@
 package com.aloarte.loomparesources.ui.compose.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,16 +12,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,8 +44,14 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OompaLoompaListItem(employee: OompaLoompaBo, onCardClicked:(Int)->Unit) {
-    Card(onClick = { onCardClicked.invoke(employee.id) } ) {
+fun OompaLoompaListItem(employee: OompaLoompaBo, onCardClicked: (Int) -> Unit) {
+    OutlinedCard(
+        border = BorderStroke(2.dp,MaterialTheme.colorScheme.primary),
+        colors = CardDefaults.outlinedCardColors(
+            contentColor = MaterialTheme.colorScheme.primary
+        ),
+        onClick = { onCardClicked.invoke(employee.id) }
+    ) {
         Row(
             modifier = Modifier
                 .height(100.dp)
@@ -67,6 +76,7 @@ fun ListCardEmployeeInfo(employee: OompaLoompaBo) {
         Row(modifier = Modifier.align(Alignment.TopEnd)) {
             Image(
                 painterResource(getProfessionIcon(employee.profession)),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
                 contentDescription = employee.profession,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -75,6 +85,7 @@ fun ListCardEmployeeInfo(employee: OompaLoompaBo) {
             )
             Image(
                 painterResource(getGenderIcon(employee.gender)),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
                 contentDescription = employee.gender,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

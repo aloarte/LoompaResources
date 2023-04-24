@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -70,7 +71,12 @@ fun LongTextDialog(description: String?, onDismiss: () -> Unit) {
                                 .fillMaxHeight(1f),
                             verticalArrangement = Arrangement.SpaceBetween
                         ) {
-                            item { Text(text = it) }
+                            item {
+                                Text(
+                                    text = it,
+                                    color = MaterialTheme.colorScheme.primary,
+                                )
+                            }
                         }
                     }
 
@@ -103,6 +109,7 @@ fun FavoritesDialog(favorites: FavoriteBo, firstName: String, onDismiss: () -> U
                             .padding(horizontal = 10.dp, vertical = 10.dp)
                     ) {
                         Image(
+                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
                             painter = painterResource(R.drawable.ic_cancel),
                             contentDescription = "Cancel icon",
                             contentScale = ContentScale.Crop,
@@ -121,6 +128,7 @@ fun FavoritesDialog(favorites: FavoriteBo, firstName: String, onDismiss: () -> U
                         Text(
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.ExtraBold,
                             text = "Favorite things from $firstName"
                         )
@@ -135,6 +143,7 @@ fun FavoritesDialog(favorites: FavoriteBo, firstName: String, onDismiss: () -> U
                         Text(
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.ExtraBold,
                             text = "Song:"
                         )
@@ -146,7 +155,12 @@ fun FavoritesDialog(favorites: FavoriteBo, firstName: String, onDismiss: () -> U
                                 .fillMaxHeight(1f),
                             verticalArrangement = Arrangement.SpaceBetween
                         ) {
-                            item { Text(text = favorites.song) }
+                            item {
+                                Text(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    text = favorites.song
+                                )
+                            }
                         }
                     }
                 }
@@ -174,13 +188,15 @@ fun PairText(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleMedium,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 text = stringResource(id = label)
             )
             Text(
                 fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 0.dp),
@@ -193,6 +209,7 @@ fun PairText(
         if (longText) {
             Image(
                 painter = painterResource(R.drawable.ic_info),
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
                 contentDescription = "Info icon",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

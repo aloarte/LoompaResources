@@ -1,7 +1,6 @@
-package com.aloarte.loomparesources.ui
+package com.aloarte.loomparesources.ui.state
 
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
-import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
 
 sealed interface UiEvent {
     object LoadHome : UiEvent

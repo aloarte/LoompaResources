@@ -1,8 +1,8 @@
 package com.aloarte.loomparesources
 
 import com.aloarte.loomparesources.domain.WillyWonkaRepository
-import com.aloarte.loomparesources.ui.UiEvent
-import com.aloarte.loomparesources.ui.UiState
+import com.aloarte.loomparesources.ui.state.UiEvent
+import com.aloarte.loomparesources.ui.state.UiState
 import com.aloarte.loomparesources.ui.state.ScreenStatus
 import com.aloarte.loomparesources.ui.viewmodel.MainViewModel
 import com.aloarte.loomparesources.utils.CoroutinesTestRule
