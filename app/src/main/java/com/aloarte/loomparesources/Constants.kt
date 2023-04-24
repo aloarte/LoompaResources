@@ -9,4 +9,6 @@ object Constants {
     const val PROF_BREWER = "Brewer"
     const val FEMALE = "F"
     const val MALE = "M"
+    const val API_SUCCESS_CODE = 200
+
 }

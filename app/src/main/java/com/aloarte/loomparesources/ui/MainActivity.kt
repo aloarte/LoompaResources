@@ -11,6 +11,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.aloarte.loomparesources.ui.compose.detail.Detail
+import com.aloarte.loomparesources.ui.compose.detail.DetailErrorLoading
+import com.aloarte.loomparesources.ui.compose.detail.DetailLoadingLottie
 import com.aloarte.loomparesources.ui.compose.home.Home
 import com.aloarte.loomparesources.ui.state.ScreenStatus
 import com.aloarte.loomparesources.ui.state.UiEvent
@@ -28,7 +30,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val state = viewModel.state.collectAsState().value
             BackHandler {
-                if(state.oompaLoompaDetail!= null ){
+                //The back is allowed from the detail or from the error screen.
+                if (state.oompaLoompaDetail != null || state.errorMessage!= null) {
                     viewModel.onEvent(UiEvent.LoadHome)
                 }
             }
@@ -54,15 +57,15 @@ class MainActivity : ComponentActivity() {
                         }
 
                         state.detailRequested == ScreenStatus.Requested -> {
-                            //TODO
+                            DetailLoadingLottie()
                         }
 
                         state.detailRequested == ScreenStatus.Error -> {
-                            //TODO
-
+                            DetailErrorLoading(state.errorMessage){
+                                viewModel.onEvent(UiEvent.LoadHome)
+                            }
                         }
                     }
-
                 }
             }
         }
@@ -70,6 +73,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        //Send the first event
         viewModel.onEvent(UiEvent.LoadHome)
 
     }

@@ -59,7 +59,7 @@ class MainViewModel @Inject constructor(private val repository: WillyWonkaReposi
                     detail?.let {
                         onEvent(UiEvent.OompaLoompaDetailSuccess(oompaLoompa = detail))
                     } ?: run {
-                        onEvent(UiEvent.OompaLoompaDetailError(errorMessage = "Error loading the ${event.oompaLoompaId} employee"))
+                        onEvent(UiEvent.OompaLoompaDetailError(errorMessage = "We couldn't find the employee with id ${event.oompaLoompaId}"))
                     }
                 }
             }

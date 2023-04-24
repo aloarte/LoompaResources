@@ -74,12 +74,13 @@ fun PagingComponentStatus(text: String) {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .padding(8.dp),
             text = text
         )
-        CircularProgressIndicator(color = Color.Black)
+        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -90,6 +91,7 @@ fun PagingComponentError(text: String) {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
                 .padding(8.dp),
