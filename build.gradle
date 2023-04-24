@@ -25,5 +25,7 @@ ext {
     coroutines = '1.6.4'
     mockk = '1.12.2'
     lottieComposeVersion = "4.2.2"
+    roomVersion = "2.5.1"
+
 
 }

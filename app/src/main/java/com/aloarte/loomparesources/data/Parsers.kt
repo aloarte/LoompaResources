@@ -3,6 +3,8 @@ package com.aloarte.loomparesources.data
 import com.aloarte.loomparesources.data.dto.FavoriteDto
 import com.aloarte.loomparesources.data.dto.OompaLoompaDto
 import com.aloarte.loomparesources.data.dto.OompaLoompaListDto
+import com.aloarte.loomparesources.data.room.ApiSizeEntity
+import com.aloarte.loomparesources.data.room.OompaLoompaEntity
 import com.aloarte.loomparesources.domain.model.FavoriteBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaBo
 import com.aloarte.loomparesources.domain.model.OompaLoompaContentBo
@@ -30,10 +32,10 @@ object Parsers {
         null
     }
 
-    fun toContentsBo(dto: OompaLoompaListDto) = OompaLoompaContentBo(
-        current = dto.current,
-        results = dto.results.map(::toItemBo),
-        total = dto.total
+    fun OompaLoompaListDto.toContentsBo() = OompaLoompaContentBo(
+        current = current,
+        results = results.map(::toItemBo),
+        total = total
     )
 
     fun toItemBo(dto: OompaLoompaDto) =
@@ -51,7 +53,6 @@ object Parsers {
             profession = dto.profession,
             quote = dto.quota,
             description = dto.description
-
         )
 
     private fun toFavoriteBo(dto: FavoriteDto) =
@@ -62,6 +63,49 @@ object Parsers {
             song = dto.song
         )
 
+
+    fun OompaLoompaBo.toEntity(detailId: Int?= null) = OompaLoompaEntity(
+        firstName = firstName,
+        lastName = lastName,
+        age = age,
+        country = country,
+        email = email,
+        food = favorite.food,
+        color = favorite.color,
+        song = favorite.song,
+        randomString = favorite.randomString,
+        gender = gender,
+        height = height,
+        id = detailId ?: id,
+        image = image,
+        profession = profession,
+        quote = quote ?: "",
+        description = description ?: ""
+    )
+
+    fun OompaLoompaEntity.toBo() = OompaLoompaBo(
+        firstName = firstName,
+        lastName = lastName,
+        age = age,
+        country = country,
+        email = email,
+        favorite = FavoriteBo(
+            food = food,
+            color = color,
+            song = song,
+            randomString = randomString
+        ),
+        gender = gender,
+        height = height,
+        id = id,
+        image = image,
+        profession = profession,
+        quote = quote ?: "",
+        description = description ?: ""
+    )
+
+    fun Int.toApiSize() = ApiSizeEntity(count = this, id = 0)
+    fun ApiSizeEntity.toApiSize() = count
 
 }
 

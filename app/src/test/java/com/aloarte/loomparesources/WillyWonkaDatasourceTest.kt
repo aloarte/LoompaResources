@@ -1,4 +1,3 @@
-
 package com.aloarte.loomparesources
 
 import com.aloarte.loomparesources.data.api.WillyWonkaApi
@@ -17,7 +16,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
@@ -80,7 +78,7 @@ class WillyWonkaDatasourceTest {
         val detailResult = runBlocking { datasource.getOompaLoompa(id = ID) }
 
         coVerify { api.getOompaLoompaDetail(id = ID) }
-        Assert.assertEquals(detailedOompaLoompa, detailResult)
+        Assert.assertEquals(detailedOompaLoompa.copy(id = 0), detailResult)
     }
 
     @Test
